@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Xcode user / build data
+xcuserdata/
+*.xcuserstate
+build/
+DerivedData/
+*.xcscmblueprint
+*.xccheckout
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Python tooling
+__pycache__/
+*.pyc
