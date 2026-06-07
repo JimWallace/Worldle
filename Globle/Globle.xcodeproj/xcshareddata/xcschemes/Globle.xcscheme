@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "00000000000000000000001D"
+            BlueprintIdentifier = "000000000000000000000020"
             BuildableName = "Globle.app"
             BlueprintName = "Globle"
+            ReferencedContainer = "container:Globle.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "00000000000000000000002C"
+            BuildableName = "GlobleTests.xctest"
+            BlueprintName = "GlobleTests"
             ReferencedContainer = "container:Globle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,6 +42,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "00000000000000000000002C"
+            BuildableName = "GlobleTests.xctest"
+            BlueprintName = "GlobleTests"
+            ReferencedContainer = "container:Globle.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -44,7 +68,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "00000000000000000000001D"
+            BlueprintIdentifier = "000000000000000000000020"
             BuildableName = "Globle.app"
             BlueprintName = "Globle"
             ReferencedContainer = "container:Globle.xcodeproj">
@@ -61,7 +85,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "00000000000000000000001D"
+            BlueprintIdentifier = "000000000000000000000020"
             BuildableName = "Globle.app"
             BlueprintName = "Globle"
             ReferencedContainer = "container:Globle.xcodeproj">
