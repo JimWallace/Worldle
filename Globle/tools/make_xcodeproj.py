@@ -259,8 +259,90 @@ def main():
     with open(os.path.join(proj_path, "project.xcworkspace", "contents.xcworkspacedata"), "w") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<Workspace\n   version = "1.0">\n'
                 '   <FileRef\n      location = "self:">\n   </FileRef>\n</Workspace>\n')
+
+    scheme_dir = os.path.join(proj_path, "xcshareddata", "xcschemes")
+    os.makedirs(scheme_dir, exist_ok=True)
+    with open(os.path.join(scheme_dir, f"{APP_NAME}.xcscheme"), "w") as f:
+        f.write(scheme_xml(target_id))
+
     print(f"Wrote {proj_path}")
     print(f"  {len(source_build)} source files, {len(resource_build)} resources, {len(groups)} groups")
+    print(f"  shared scheme: {APP_NAME}.xcscheme")
+
+
+def scheme_xml(target_id):
+    ref = (f'            BuildableIdentifier = "primary"\n'
+           f'            BlueprintIdentifier = "{target_id}"\n'
+           f'            BuildableName = "{APP_NAME}.app"\n'
+           f'            BlueprintName = "{APP_NAME}"\n'
+           f'            ReferencedContainer = "container:{APP_NAME}.xcodeproj"')
+    return f'''<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1520"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+{ref}>
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+{ref}>
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+{ref}>
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
+'''
 
 
 def build_config(cid, name, settings):
