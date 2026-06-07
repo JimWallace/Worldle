@@ -1,6 +1,7 @@
 name: Build
 
-# Compile-checks and unit-tests the app on macOS (the iOS frameworks only exist there).
+# Compile-checks and unit-tests the app on macOS (the iOS frameworks only exist there),
+# and verifies the pure-Swift developer tools can regenerate the project/data/icon.
 on:
   push:
     branches: [main]
@@ -35,9 +36,30 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - name: Show Xcode version
-        run: xcodebuild -version
       - name: Run unit tests
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project Globle/Globle.xcodeproj \
+            -scheme Globle \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            test
+
+  tools:
+    name: Swift tools (regenerate & verify)
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the Swift dev tools
+        run: swift build --package-path Globle/GlobleTools
+      - name: Regenerate project, data, and icon
+        run: |
+          swift run --package-path Globle/GlobleTools make-xcodeproj
+          swift run --package-path Globle/GlobleTools build-countries
+          swift run --package-path Globle/GlobleTools make-icon
+      - name: Build & test the app from the regenerated artifacts
         run: |
           set -o pipefail
           xcodebuild \
